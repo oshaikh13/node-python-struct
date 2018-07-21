@@ -451,11 +451,11 @@ var PythonStruct = {
         return size;
     },
 
-    unpack: function (format, data, checkBounds) {
+    unpack: function (format, data, position, checkBounds) {
 
         var unpacked = [];
 
-        var position = 0;
+        if (!position) position = 0;
         var decimal = null;
 
         var i = 0, c, len, op, size, align, repeat, unpack;
