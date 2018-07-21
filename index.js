@@ -1,4 +1,6 @@
 const Long = require('long');
+const arch = require('arch');
+
 // If Node.js doesn't supply buffer, then load a replacement.
 // This will occur on browsers.
 if (!Buffer) Buffer = require('buffer/').Buffer;
@@ -36,8 +38,9 @@ if (!Buffer) Buffer = require('buffer/').Buffer;
  ?: boolean
  */
 
-const IS_LITTLE_ENDIAN = require('os').endianness() === 'LE';
-const IS_64bit = process.arch === 'x64';
+
+const IS_LITTLE_ENDIAN = new Uint8Array(new Uint32Array([0x12345678]).buffer)[0] === 0x78;
+const IS_64bit = process.arch === arch();
 
 // Maps consist of: size, alignment, unpack function
 
